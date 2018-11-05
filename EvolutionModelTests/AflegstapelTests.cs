@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Evolution.Model;
 
@@ -36,6 +37,40 @@ namespace EvolutionModelTests {
         var actualCount = aflegstapel.Count;
 
         Assert.AreEqual(cardAmount, actualCount);
+      }
+    }
+
+    [TestMethod]
+    public void AflegstapelIsLeegNaEmpty() {
+      var aflegstapel = new Aflegstapel();
+
+      for(int i = 0; i < 5; i++) {
+        var card = new Card();
+        aflegstapel.Add(card);
+      }
+      Assert.AreEqual(5, aflegstapel.Count);
+
+      aflegstapel.Empty();
+      Assert.AreEqual(0, aflegstapel.Count);
+    }
+
+    [TestMethod]
+    public void AflegstapelReturntAlleKaartenDieErinZatenNaEmpty() {
+      var aflegsapel = new Aflegstapel();
+      var cards = Enumerable.Range(0, 5).Select(x => new Card());
+
+      foreach(var card in cards) {
+        aflegsapel.Add(card);
+      }
+
+      Assert.AreEqual(5, aflegsapel.Count);
+
+      var emptiedCards = aflegsapel.Empty();
+
+      Assert.AreEqual(5, emptiedCards.Count());
+      foreach(var card in cards) {
+        // Check that each card is present in the returned set of cards.
+        Assert.IsTrue(emptiedCards.Contains(card));
       }
     }
   }

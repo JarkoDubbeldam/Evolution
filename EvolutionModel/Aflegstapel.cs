@@ -17,17 +17,10 @@ namespace Evolution.Model {
     public void Add(Card kaart) {
       cards.Push(kaart);
     }
-    
-/*
- * Er zijn twee mogelijkheden, of je verplaatst alle kaarten naar het deck, of je refresht het deck en leegt de aflegstapel. 
-    public void Emptyaflegstapel()
-        {
-          foreach(Card in Aflegstapel)
-            {
 
-            }  
-        }
-
+    // Er zijn twee mogelijkheden, of je verplaatst alle kaarten naar het deck, of je refresht het deck en leegt de aflegstapel. 
+    public IEnumerable<Card> Empty() {
+      throw new NotImplementedException();
+    }
   }
 }
-*/ 
