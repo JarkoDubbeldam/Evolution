@@ -56,21 +56,39 @@ namespace EvolutionModelTests {
 
     [TestMethod]
     public void AflegstapelReturntAlleKaartenDieErinZatenNaEmpty() {
-      var aflegsapel = new Aflegstapel();
-      var cards = Enumerable.Range(0, 5).Select(x => new Card());
+      var aflegstapelInstance = new Aflegstapel();
+      var cards = Enumerable.Range(0, 5).Select(x => new TestCard(x));
 
       foreach(var card in cards) {
-        aflegsapel.Add(card);
+        aflegstapelInstance.Add(card);
       }
 
-      Assert.AreEqual(5, aflegsapel.Count);
+      Assert.AreEqual(5, aflegstapelInstance.Count);
 
-      var emptiedCards = aflegsapel.Empty();
+      var emptiedCards = aflegstapelInstance.Empty();
 
       Assert.AreEqual(5, emptiedCards.Count());
       foreach(var card in cards) {
         // Check that each card is present in the returned set of cards.
-        Assert.IsTrue(emptiedCards.Contains(card));
+        var isPresent = false;
+        foreach(TestCard afgelegdeKaart in emptiedCards) {
+          if (afgelegdeKaart.Equals(card)) {
+            isPresent = true;
+          }
+        }
+        Assert.IsTrue(isPresent);
+      }
+    }
+
+    private class TestCard : Card, IEquatable<TestCard> {
+      public TestCard(int nummertje) {
+        Nummertje = nummertje;
+      }
+
+      public int Nummertje { get; set; }
+
+      public bool Equals(TestCard other) {
+        return other.Nummertje == this.Nummertje;
       }
     }
   }

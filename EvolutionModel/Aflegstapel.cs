@@ -1,8 +1,6 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
 namespace Evolution.Model {
   public class Aflegstapel {
@@ -20,12 +18,9 @@ namespace Evolution.Model {
 
     // De kaarten moeten van de aflegstapel naar het deck want er zijn nog kaarten in het spel die niet naar het deck moeten. 
     public IEnumerable<Card> Empty() {
-            // throw new NotImplementedException();
-       var tijdelijkdeck = new Aflegstapel();
-       foreach(var card in cards)
-            {
-                tijdelijkdeck.Add(card)
-            }
+      var kaarten = cards.ToArray();
+      cards.Clear();
+      return kaarten;
     }
   }
 }
