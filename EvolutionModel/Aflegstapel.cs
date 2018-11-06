@@ -18,9 +18,14 @@ namespace Evolution.Model {
       cards.Push(kaart);
     }
 
-    // Er zijn twee mogelijkheden, of je verplaatst alle kaarten naar het deck, of je refresht het deck en leegt de aflegstapel. 
+    // De kaarten moeten van de aflegstapel naar het deck want er zijn nog kaarten in het spel die niet naar het deck moeten. 
     public IEnumerable<Card> Empty() {
-      throw new NotImplementedException();
+            // throw new NotImplementedException();
+       var tijdelijkdeck = new Aflegstapel();
+       foreach(var card in cards)
+            {
+                tijdelijkdeck.Add(card)
+            }
     }
   }
 }
