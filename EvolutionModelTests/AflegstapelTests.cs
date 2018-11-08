@@ -68,16 +68,20 @@ namespace EvolutionModelTests {
       var emptiedCards = aflegstapelInstance.Empty(); //Maken een lege stapel en legen de aflegstapel daarheen
 
       Assert.AreEqual(5, emptiedCards.Count()); //Check of er 5 kaarten in de stapel zitten
-      foreach(var card in cards) {
-        // Check that each card is present in the returned set of cards.
-        var isPresent = false;
-        foreach(TestCard afgelegdeKaart in emptiedCards) {
-          if (afgelegdeKaart.Equals(card)) {
-            isPresent = true;
-          }
-        }
+      foreach(TestCard card in emptiedCards) {
+        // Check that each of the returned cards is present in the initial set of cards.
+        bool isPresent = Contains(cards, card);
         Assert.IsTrue(isPresent);
       }
+    }
+
+    private static bool Contains<T>(IEnumerable<T> sequence, T item) where T : IEquatable<T> {
+      foreach (var value in sequence) {
+        if (value.Equals(item)) {
+          return true;
+        }
+      }
+      return false;
     }
 
     private class TestCard : Card, IEquatable<TestCard> {
