@@ -56,18 +56,18 @@ namespace EvolutionModelTests {
 
     [TestMethod]
     public void AflegstapelReturntAlleKaartenDieErinZatenNaEmpty() {
-      var aflegstapelInstance = new Aflegstapel();
-      var cards = Enumerable.Range(0, 5).Select(x => new TestCard(x));
+      var aflegstapelInstance = new Aflegstapel(); //Nieuwe aflegstapel voor deze test
+      var cards = Enumerable.Range(0, 5).Select(x => new TestCard(x)); //We maken 5 kaarten met een nummertje
 
-      foreach(var card in cards) {
+      foreach(var card in cards) { // We stoppen de 5 kaarten in de aflegstapel
         aflegstapelInstance.Add(card);
       }
 
-      Assert.AreEqual(5, aflegstapelInstance.Count);
+      Assert.AreEqual(5, aflegstapelInstance.Count); // Check of er ook echt 5 inzitten
 
-      var emptiedCards = aflegstapelInstance.Empty();
+      var emptiedCards = aflegstapelInstance.Empty(); //Maken een lege stapel en legen de aflegstapel daarheen
 
-      Assert.AreEqual(5, emptiedCards.Count());
+      Assert.AreEqual(5, emptiedCards.Count()); //Check of er 5 kaarten in de stapel zitten
       foreach(var card in cards) {
         // Check that each card is present in the returned set of cards.
         var isPresent = false;

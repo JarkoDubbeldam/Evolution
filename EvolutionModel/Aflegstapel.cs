@@ -18,9 +18,9 @@ namespace Evolution.Model {
 
     // De kaarten moeten van de aflegstapel naar het deck want er zijn nog kaarten in het spel die niet naar het deck moeten. 
     public IEnumerable<Card> Empty() {
-      var kaarten = cards.ToArray();
-      cards.Clear();
-      return kaarten;
+      var kaarten = cards.ToArray(); // maak een array 'kaarten' aan en zet de cards in dat array
+      cards.Clear(); //maak de stapel cards leeg
+      return kaarten; // return de set kaarten. 
     }
   }
 }
