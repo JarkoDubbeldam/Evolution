@@ -12,7 +12,7 @@ namespace EvolutionModelTests{
         public void FoodbagBegintLeeg(){
             var foodbag = new Foodbag();
 
-            var expectedCount = 0;
+            uint expectedCount = 0;
             var actualCount = foodbag.Count;
             Assert.AreEqual(expectedCount, actualCount);
         }
@@ -20,8 +20,8 @@ namespace EvolutionModelTests{
         public void KanEtenToevoegen(){
             var foodbag = new Foodbag();
             foodbag.AddFood(5);
-            var check = 5;
-            Assert.AreEqual(foodbag, check);
+            uint check = 5;
+            Assert.AreEqual(foodbag.Foodamount, check);
 
         }
     }

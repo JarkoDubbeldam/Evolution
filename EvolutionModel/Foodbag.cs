@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 
 namespace Evolution.Model {
     public class Foodbag {
-        private int foodamount;
-
-        public Foodbag(){
-            foodamount = 0;
+        public uint Foodamount {
+            get;
+            private set;
         }
 
-        public int Count => foodamount;
+        public Foodbag(){ 
+            Foodamount = 0;
+        }
 
-        public void AddFood(int erbij){
-            foodamount = foodamount + erbij;
+        public uint Count => Foodamount;
+
+        public void AddFood(uint erbij){
+            Foodamount += erbij;
         }
     }
 }
