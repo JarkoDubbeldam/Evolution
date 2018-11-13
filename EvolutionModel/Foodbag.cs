@@ -11,5 +11,12 @@ namespace Evolution.Model {
         public Foodbag(){
             foodamount = 0;
         }
+
+        public int Count => foodamount;
+
+        public void AddFood(int erbij){
+            foodamount = foodamount + erbij;
+        }
     }
 }
+

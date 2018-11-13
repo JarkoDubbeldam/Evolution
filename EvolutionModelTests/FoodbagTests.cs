@@ -16,5 +16,13 @@ namespace EvolutionModelTests{
             var actualCount = foodbag.Count;
             Assert.AreEqual(expectedCount, actualCount);
         }
+        [TestMethod]
+        public void KanEtenToevoegen(){
+            var foodbag = new Foodbag();
+            foodbag.AddFood(5);
+            var check = 5;
+            Assert.AreEqual(foodbag, check);
+
+        }
     }
 }
