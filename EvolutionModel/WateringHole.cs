@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Evolution.Model
 {
-    class WateringHole{
+    public class WateringHole{
         public uint Foodamount {
             get;
             private set;

@@ -12,8 +12,8 @@ namespace EvolutionModelTests {
         public void WateringHoleConstructionStartsEmpty() {
             var wateringhole = new WateringHole();
 
-            var expectedCount = 0;
-            var actualCount = wateringhole.foodamount;
+            uint expectedCount = 0;
+            var actualCount = wateringhole.Foodamount;
 
             Assert.AreEqual(expectedCount, actualCount);
         }
