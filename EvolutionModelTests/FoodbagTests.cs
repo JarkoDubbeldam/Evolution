@@ -9,7 +9,7 @@ namespace EvolutionModelTests{
     [TestClass]
     public class FoodbagTests{
         [TestMethod]
-        public void FoodbagBegintLeeg(){
+        public void FoodbagConstructionStartsWithEmptyFoodbag(){
             var foodbag = new Foodbag();
 
             uint expectedCount = 0;
@@ -17,7 +17,7 @@ namespace EvolutionModelTests{
             Assert.AreEqual(expectedCount, actualCount);
         }
         [TestMethod]
-        public void KanEtenToevoegen(){
+        public void FoodbagAddFoodIncreasesFoodamountWithPassedValue(){
             var foodbag = new Foodbag();
             foodbag.AddFood(5);
             uint check = 5;
@@ -25,7 +25,7 @@ namespace EvolutionModelTests{
 
         }
         [TestMethod]
-        public void Overflowcheck() {
+        public void FoodbagAddFoodThrowsExceptionWhenFoodamountOverflows() {
             var bag = new Foodbag();
             bag.AddFood(1); // Foodbag now contains a positive amount of food.
             Assert.ThrowsException<OverflowException>(() => bag.AddFood(uint.MaxValue));

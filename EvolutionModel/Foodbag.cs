@@ -15,10 +15,10 @@ namespace Evolution.Model {
             Foodamount = 0;
         }
 
-        public void AddFood(uint erbij){
+        public void AddFood(uint additionalFood){
             checked
             {
-                Foodamount += erbij;
+                Foodamount += additionalFood;
             } 
         }
     }
