@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Evolution.Model {
   public interface IFoodContainer {
-    uint FoodAmount { get; }
-    void AddFood(uint FoodAmount);
+    int FoodAmount { get; }
+    void AddFood(int FoodAmount);
   }
 }

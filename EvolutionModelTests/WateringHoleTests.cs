@@ -1,22 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
+﻿using Evolution.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Evolution.Model;
 
 namespace EvolutionModelTests {
-    [TestClass]
-    public class WateringHoleTests {
-        [TestMethod]
-        public void WateringHoleConstructionStartsEmpty() {
-            var wateringhole = new WateringHole();
+  [TestClass]
+  public class WateringHoleTests {
+    [TestMethod]
+    public void WateringHoleConstructionStartsEmpty() {
+      var wateringhole = new WateringHole();
 
-            uint expectedCount = 0;
-            var actualCount = wateringhole.FoodAmount;
+      int expectedCount = 0;
+      var actualCount = wateringhole.FoodAmount;
 
-            Assert.AreEqual(expectedCount, actualCount);
-        }
-    
+      Assert.AreEqual(expectedCount, actualCount);
     }
+
+    [TestMethod]
+    public void WateringHoleAddFoodIncreasesFoodAmount() {
+      var wateringhole = new WateringHole();
+
+      Assert.AreEqual(0, wateringhole.FoodAmount);
+
+      wateringhole.AddFood(10);
+
+      Assert.AreEqual(10, wateringhole.FoodAmount);
+
+      wateringhole.AddFood(20);
+
+      Assert.AreEqual(30, wateringhole.FoodAmount);
+    }
+
+    [TestMethod]
+    public void WaterHoleAddFoodDecreasesFoodAmountWhenNegativeValueIsAdded() {
+      var wateringhole = new WateringHole();
+
+      wateringhole.AddFood(10);
+
+      Assert.AreEqual(10, wateringhole.FoodAmount);
+
+      wateringhole.AddFood(-5);
+
+      Assert.AreEqual(5, wateringhole.FoodAmount);
+    }
+
+    [TestMethod]
+    public void WaterHoleAddFoodCannotDecreaseFoodAmountBeyond0() {
+      var wateringhole = new WateringHole();
+
+      wateringhole.AddFood(10);
+
+      Assert.AreEqual(10, wateringhole.FoodAmount);
+
+      wateringhole.AddFood(-20);
+
+      Assert.AreEqual(0, wateringhole.FoodAmount);
+    }
+  }
 }

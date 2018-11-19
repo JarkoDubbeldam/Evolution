@@ -2,16 +2,24 @@
 
 namespace Evolution.Model {
   public class WateringHole : IFoodContainer {
-    public uint FoodAmount {
-      get;
-      private set;
+    private int foodAmount;
+    public int FoodAmount {
+      get {
+        return foodAmount;
+      }
+      private set {
+        if(value < 0) {
+          value = 0;
+        }
+        foodAmount = value;
+      }
     }
 
     public WateringHole() {
       FoodAmount = 0;
     }
 
-    public void AddFood(uint FoodAmount) {
+    public void AddFood(int FoodAmount) {
       throw new NotImplementedException();
     }
   }
