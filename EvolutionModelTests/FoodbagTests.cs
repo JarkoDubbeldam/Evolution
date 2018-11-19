@@ -13,7 +13,7 @@ namespace EvolutionModelTests{
             var foodbag = new Foodbag();
 
             uint expectedCount = 0;
-            var actualCount = foodbag.Foodamount;
+            var actualCount = foodbag.FoodAmount;
             Assert.AreEqual(expectedCount, actualCount);
         }
         [TestMethod]
@@ -21,7 +21,7 @@ namespace EvolutionModelTests{
             var foodbag = new Foodbag();
             foodbag.AddFood(5);
             uint check = 5;
-            Assert.AreEqual(foodbag.Foodamount, check);
+            Assert.AreEqual(foodbag.FoodAmount, check);
 
         }
         [TestMethod]

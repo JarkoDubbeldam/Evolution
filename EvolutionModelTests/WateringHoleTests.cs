@@ -13,7 +13,7 @@ namespace EvolutionModelTests {
             var wateringhole = new WateringHole();
 
             uint expectedCount = 0;
-            var actualCount = wateringhole.Foodamount;
+            var actualCount = wateringhole.FoodAmount;
 
             Assert.AreEqual(expectedCount, actualCount);
         }
