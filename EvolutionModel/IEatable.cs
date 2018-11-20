@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Evolution.Model
 {
-    public interface IEatFood {
-        int FoodEaten { get;  }
-        void Eatfood(int FoodEaten);
+    public interface IEatable {
+        int FoodAmount { get;  }
+        void FoodEaten( int FoodAmount);
     }
+
 }
