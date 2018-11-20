@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolution.Model
-{
+namespace Evolution.Model {
     public interface IEatable {
-        int FoodAmount { get;  }
-        void FoodEaten( int FoodAmount);
+        bool CanBeEatenBy(Species Eater);
+
+        int GetsEaten();
     }
+
 
 }
