@@ -8,7 +8,7 @@ namespace Evolution.Model {
         return foodAmount;
       }
       private set {
-        if(value < 0) {
+        if (value < 0) {
           value = 0;
         }
         foodAmount = value;
@@ -18,22 +18,24 @@ namespace Evolution.Model {
     public WateringHole() => FoodAmount = 0;
 
     public void AddFood(int additionalfood) {
-            checked{
-                FoodAmount += additionalfood;
-            } 
+      checked {
+        FoodAmount += additionalfood;
+      }
     }
 
-    bool CanBeEatenBy(Species Eater) => !Eater.IsPredator;
+    public bool CanBeEatenBy(Species eater) => !eater.IsPredator && FoodAmount > 0;
 
-    int GetsEaten(Eater){
-            if (CanBeEatenBy(Eater) == true){
-                if (FoodAmount > 1){
-                    FoodAmount -= 1;
-                    return 1;
-                }
-                else throw new InvalidOperationException($"The {nameof(WateringHole)} is empty!")
-            } 
-            else throw new InvalidOperationException($"{nameof(Species)} is a carnivore.")
+    public int GetsEaten(Species eater) {
+      if (CanBeEatenBy(eater) == true) {
+        if (FoodAmount > 1) {
+          FoodAmount--;
+          return 1;
+        } else {
+          throw new InvalidOperationException($"The {nameof(WateringHole)} is empty!");
         }
+      } else {
+        throw new InvalidOperationException($"{nameof(eater)} is a carnivore.");
+      }
     }
+  }
 }
