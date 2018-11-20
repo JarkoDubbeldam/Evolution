@@ -19,8 +19,10 @@ namespace Evolution.Model {
       FoodAmount = 0;
     }
 
-    public void AddFood(int FoodAmount) {
-      throw new NotImplementedException();
+    public void AddFood(int additionalfood) {
+            checked{
+                FoodAmount += additionalfood;
+            } 
     }
   }
 }
