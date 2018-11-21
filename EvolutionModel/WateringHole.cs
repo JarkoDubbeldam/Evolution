@@ -25,19 +25,32 @@ namespace Evolution.Model {
 
     public bool CanBeEatenBy(Species eater) => !eater.IsPredator && FoodAmount > 0;
 
-        public bool GetsEaten(bool eater, out int foodEaten)
-        {
-            // Doe iets aan voorbereiding als dat nodig is.
-
-            if(CanBeEatenBy(eater)
-            {
+        public bool TryToEat(Species eater, out int amountEaten){
+            if(CanBeEatenBy(eater){
                 FoodAmount--;
-                foodEaten = 1;
+                amountEaten = 1;
                 return true;
             } 
             else {
-                foodEaten = default(int);
+                amountEaten = default(int);
                 return false;
+            }
+        }
+
+        public int GetsEaten(Species eater){
+            if(CanBeEatenBy(eater){
+                if(FoodAmount >= 1){
+                    FoodAmount -= 1;
+                    return 1;
+                } 
+                else{
+                    return default(int);
+                    throw new InvalidOperationException($"The {nameof(WateringHole)} is empty!");
+                }
+            } 
+            else{
+                return default(int);
+                throw new InvalidOperationException($"{nameof(Species)} is a carnivore.");
             }
         }
     }
