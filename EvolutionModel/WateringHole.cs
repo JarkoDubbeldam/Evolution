@@ -25,20 +25,20 @@ namespace Evolution.Model {
 
     public bool CanBeEatenBy(Species eater) => !eater.IsPredator && FoodAmount > 0;
 
-        /* public int GetsEaten(Species eater) {
-           if (CanBeEatenBy(eater) == true) {
-               FoodAmount--;
-               return 1;
-           } 
-           else {
-                // Geef text terug: $"{nameof(eater)} is a carnivore, and cannot eat this."
-                return 0;
-           }
-         }
-        
+        public bool GetsEaten(bool eater, out int foodEaten)
+        {
+            // Doe iets aan voorbereiding als dat nodig is.
 
-    public int GetsEaten = ;
-    public bool Succes = TryDoSomething(out result); 
-    */
-  }
+            if(CanBeEatenBy(eater)
+            {
+                FoodAmount--;
+                foodEaten = 1;
+                return true;
+            } 
+            else {
+                foodEaten = default(int);
+                return false;
+            }
+        }
+    }
 }
