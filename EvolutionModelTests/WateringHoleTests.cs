@@ -54,5 +54,29 @@ namespace EvolutionModelTests {
 
       Assert.AreEqual(0, wateringhole.FoodAmount);
     }
+
+        [TestMethod]
+        public void WaterHoleTryEatingCanEat()
+        {
+
+        }
+
+        [TestMethod]
+        public void WaterHoleEatingCanEat()
+        {
+
+        }
+
+        [TestMethod]
+        public void WaterHoleCannotTryEatingIfHoleIsEmpty()
+        {
+
+        }
+
+        [TestMethod]
+        public void WaterHoleThrowsExceptionIfEatingIsEmpty()
+        {
+
+        }
   }
 }

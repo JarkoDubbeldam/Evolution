@@ -25,7 +25,7 @@ namespace Evolution.Model {
 
     public bool CanBeEatenBy(Species eater) => !eater.IsPredator && FoodAmount > 0;
 
-        public bool TryToEat(Species eater, out int amountEaten){
+        public bool TryEat(Species eater, out int amountEaten){
             if(CanBeEatenBy(eater){
                 FoodAmount--;
                 amountEaten = 1;
@@ -37,20 +37,13 @@ namespace Evolution.Model {
             }
         }
 
-        public int GetsEaten(Species eater){
-            if(CanBeEatenBy(eater){
-                if(FoodAmount >= 1){
-                    FoodAmount -= 1;
-                    return 1;
-                } 
-                else{
-                    return default(int);
-                    throw new InvalidOperationException($"The {nameof(WateringHole)} is empty!");
-                }
-            } 
+        public int Eat(Species eater){
+            if(CanBeEatenBy(eater)){
+                FoodAmount -= 1;
+                return 1;
+            }  
             else{
-                return default(int);
-                throw new InvalidOperationException($"{nameof(Species)} is a carnivore.");
+                throw new InvalidOperationException($"{nameof(Species)} cannot eat from this source and/or the source is empty.");
             }
         }
     }
