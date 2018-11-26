@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 
 namespace Evolution.Model {
-  public class WateringHole : IFoodContainer, IEatable {
+  public class WateringHole : IFoodContainer, IEatable{
     private int foodAmount;
     public int FoodAmount {
       get {
@@ -25,9 +25,9 @@ namespace Evolution.Model {
       }
     }
 
-    public bool CanBeEatenBy(Species eater) => !eater.IsPredator && FoodAmount > 0;
+    public bool CanBeEatenBy(IEater eater) => !eater.IsPredator && FoodAmount > 0;
 
-        public bool TryEat(Species eater, out int amountEaten){
+        public bool TryEat(IEater eater, out int amountEaten){
             if(CanBeEatenBy(eater)){
                 FoodAmount--;
                 amountEaten = 1;
@@ -39,13 +39,13 @@ namespace Evolution.Model {
             }
         }
 
-        public int Eat(Species eater){
+        public int Eat(IEater eater){
             if(CanBeEatenBy(eater)){
-                FoodAmount -= 1;
+                FoodAmount -- ;
                 return 1;
             }  
             else{
-                throw new InvalidOperationException($"{nameof(Species)} cannot eat from this source and/or the source is empty.");
+                throw new InvalidOperationException($"{nameof(IEater)} cannot eat from this source and/or the source is empty.");
             }
         }
     }

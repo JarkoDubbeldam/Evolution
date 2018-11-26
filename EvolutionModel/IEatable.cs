@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Evolution.Model {
   public interface IEatable {
-    bool CanBeEatenBy(Species eater);
-    int Eat(Species eater);
-    bool TryEat(Species eater, out int amountEaten);
+    bool CanBeEatenBy(IEater eater);
+    int Eat(IEater eater);
+    bool TryEat(IEater eater, out int amountEaten);
   }
 }

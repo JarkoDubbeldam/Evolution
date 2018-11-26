@@ -59,7 +59,7 @@ namespace EvolutionModelTests {
         [TestMethod]
         public void WaterHoleTryEatCanEat(){
             var wateringhole = new WateringHole();
-            var species = new Species();
+            var species = new MockSpecies();
             wateringhole.AddFood(10);
             Assert.AreEqual(10, wateringhole.FoodAmount);
             var result = wateringhole.TryEat(species, out int food);
@@ -73,7 +73,7 @@ namespace EvolutionModelTests {
         public void WaterHoleEatCanEat()
         {
             var wateringhole = new WateringHole();
-            var species = new Species();
+            var species = new MockSpecies();
             wateringhole.AddFood(10);
             var result = wateringhole.Eat(species);
             Assert.AreEqual(9, wateringhole.FoodAmount);
@@ -84,7 +84,7 @@ namespace EvolutionModelTests {
         public void WaterHoleCannotTryEatIfHoleIsEmpty()
         {
             var wateringhole = new WateringHole();
-            var species = new Species();
+            var species = new MockSpecies();
             var result = wateringhole.TryEat(species, out int food);
             Assert.AreEqual(0, food);
             Assert.IsFalse(result);
@@ -95,13 +95,97 @@ namespace EvolutionModelTests {
         public void WaterHoleThrowsExceptionIfEatIsEmpty()
         {
             var wateringhole = new WateringHole();
-            var species = new Species();
+            var species = new MockSpecies();
             Assert.ThrowsException<InvalidOperationException>(()=> wateringhole.Eat(species));
         }
-  }
+
+        [TestMethod]
+        public void WaterHoleTryEatCannotEatAsPredator()
+        {
+            var wateringhole = new WateringHole();
+            var species = new MockSpecies();
+            species.IsPredator = true;
+            wateringhole.AddFood(10);
+            Assert.AreEqual(10, wateringhole.FoodAmount);
+            var result = wateringhole.TryEat(species, out int food);
+            Assert.AreEqual(0, food);
+            Assert.AreEqual(10, wateringhole.FoodAmount);
+            Assert.IsFalse(result);
+
+        }
+
+        [TestMethod]
+        public void WaterHoleEatCannotEatAsPredator()
+        {
+            var wateringhole = new WateringHole();
+            var species = new MockSpecies();
+            species.IsPredator = true;
+            wateringhole.AddFood(10);
+            Assert.ThrowsException<InvalidOperationException>(() => wateringhole.Eat(species));
+        }
+
+        [TestMethod]
+        public void WaterHoleCannotTryEatIfHoleIsEmptyAndPredator()
+        {
+            var wateringhole = new WateringHole();
+            var species = new MockSpecies();
+            species.IsPredator = true;
+            var result = wateringhole.TryEat(species, out int food);
+            Assert.AreEqual(0, food);
+            Assert.IsFalse(result);
+            Assert.AreEqual(0, wateringhole.FoodAmount);
+        }
+
+        [TestMethod]
+        public void WaterHoleThrowsExceptionIfEatIsEmptyAndPredator()
+        {
+            var wateringhole = new WateringHole();
+            var species = new MockSpecies();
+            species.IsPredator = true;
+            Assert.ThrowsException<InvalidOperationException>(() => wateringhole.Eat(species));
+        }
+
+        [TestMethod]
+        public void WaterholeCanBeEatenByNoPredatorWithFood() {
+            var wateringhole = new WateringHole();
+            var species = new MockSpecies();
+            wateringhole.AddFood(10);
+            Assert.IsTrue(wateringhole.CanBeEatenBy(species));
+            Assert.AreEqual(10, wateringhole.FoodAmount);
+
+        }
+
+        [TestMethod]
+        public void WaterholeCanNotBeEatenByPredatorWithFood() {
+            var wateringhole = new WateringHole();
+            var species = new MockSpecies();
+            wateringhole.AddFood(10);
+            species.IsPredator = true;
+            Assert.IsFalse(wateringhole.CanBeEatenBy(species));
+            Assert.AreEqual(10, wateringhole.FoodAmount);
+        }
+
+        [TestMethod]
+        public void WaterholeCanNotBeEatenByNoPredatorNoFood() {
+            var wateringhole = new WateringHole();
+            var species = new MockSpecies();
+            Assert.IsFalse(wateringhole.CanBeEatenBy(species));
+            Assert.AreEqual(0, wateringhole.FoodAmount);
+        }
+
+        [TestMethod]
+        public void WaterholeCanNotBeEatenByPredatorNoFood() {
+            var wateringhole = new WateringHole();
+            var species = new MockSpecies();
+            species.IsPredator = true;
+            Assert.IsFalse(wateringhole.CanBeEatenBy(species));
+            Assert.AreEqual(0, wateringhole.FoodAmount);
+        }
+    }
 }
 
 /* Begin met CanBeEatenBy, Wanner moet die true geven, en wanneer moet die false geven, 
  * Er kan wel of niet eten aanwezig zijn, en het dier kan wel of niet predator zijn, 
  * Daar heb je vier combinaties van, en dus ook vier mogelijke uitkomsten, die je ieder moet testen.
+ * Daarnaast de vier mogelijkhedenin canbeeatenby
  */ 
