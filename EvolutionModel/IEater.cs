@@ -8,7 +8,7 @@ namespace Evolution.Model
 {
     public interface IEater
     {
-       bool IsPredator { get; set; }
+       bool IsPredator { get;}
 
     }
 }

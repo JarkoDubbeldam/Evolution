@@ -4,6 +4,6 @@ using System;
 
 namespace Evolution.Model {
   public class Species : IEater {
-    public bool IsPredator { get; internal set; }
+        public bool IsPredator => throw new NotImplementedException();
   }
 }

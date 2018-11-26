@@ -8,5 +8,6 @@ namespace EvolutionModelTests
 {
     public class MockSpecies : IEater 
     {
+        public bool IsPredator { get; set; }
     }
 }
