@@ -43,6 +43,10 @@
   <ItemGroup>
     <Compile Include="Aflegstapel.cs" />
     <Compile Include="Card.cs" />
+    <Compile Include="IEatable.cs" />
+    <Compile Include="IEater.cs" />
+    <Compile Include="IFoodContainer.cs" />
+    <Compile Include="WateringHole.cs" />
     <Compile Include="Foodbag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

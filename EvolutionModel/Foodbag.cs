@@ -1,26 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Evolution.Model {
-    public class Foodbag {
-        public uint Foodamount {
-            get;
-            private set;
-        }
-
-        public Foodbag(){ 
-            Foodamount = 0;
-        }
-
-        public void AddFood(uint additionalFood){
-            checked
-            {
-                Foodamount += additionalFood;
-            } 
-        }
+  public class Foodbag : IFoodContainer {
+    public int FoodAmount {
+      get;
+      private set;
     }
+
+    public Foodbag() {
+      FoodAmount = 0;
+    }
+
+    public void AddFood(int additionalFood) {
+      if(additionalFood < 0) {
+        throw new InvalidOperationException($"Not allowed to remove food from the foodbag. {nameof(additionalFood)} is {additionalFood}.");
+      }
+
+      checked {
+        FoodAmount += additionalFood;
+      }
+    }
+  }
 }
 
