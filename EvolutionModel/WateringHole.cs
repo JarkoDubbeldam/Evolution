@@ -41,11 +41,11 @@ namespace Evolution.Model {
 
         public int Eat(IEater eater){
             if(CanBeEatenBy(eater)){
-                FoodAmount -- ;
+                FoodAmount--;
                 return 1;
             }  
             else{
-                throw new InvalidOperationException($"{nameof(IEater)} cannot eat from this source and/or the source is empty.");
+                throw new InvalidOperationException($"{nameof(eater)} cannot eat from this source and/or the source is empty.");
             }
         }
     }

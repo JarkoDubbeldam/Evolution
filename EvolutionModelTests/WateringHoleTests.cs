@@ -60,6 +60,7 @@ namespace EvolutionModelTests {
         public void WaterHoleTryEatCanEat(){
             var wateringhole = new WateringHole();
             var species = new MockSpecies();
+            species.IsPredator = false;
             wateringhole.AddFood(10);
             Assert.AreEqual(10, wateringhole.FoodAmount);
             var result = wateringhole.TryEat(species, out int food);
@@ -74,6 +75,7 @@ namespace EvolutionModelTests {
         {
             var wateringhole = new WateringHole();
             var species = new MockSpecies();
+            species.IsPredator = false;
             wateringhole.AddFood(10);
             var result = wateringhole.Eat(species);
             Assert.AreEqual(9, wateringhole.FoodAmount);
@@ -85,6 +87,7 @@ namespace EvolutionModelTests {
         {
             var wateringhole = new WateringHole();
             var species = new MockSpecies();
+            species.IsPredator = false;
             var result = wateringhole.TryEat(species, out int food);
             Assert.AreEqual(0, food);
             Assert.IsFalse(result);
@@ -92,11 +95,13 @@ namespace EvolutionModelTests {
         }
 
         [TestMethod]
-        public void WaterHoleThrowsExceptionIfEatIsEmpty()
+        public void WaterHoleThrowsCannotEatIfWaterHoleIsEmpty()
         {
             var wateringhole = new WateringHole();
             var species = new MockSpecies();
+            species.IsPredator = false;
             Assert.ThrowsException<InvalidOperationException>(()=> wateringhole.Eat(species));
+            Assert.AreEqual(0, wateringhole.FoodAmount);
         }
 
         [TestMethod]
@@ -122,6 +127,7 @@ namespace EvolutionModelTests {
             species.IsPredator = true;
             wateringhole.AddFood(10);
             Assert.ThrowsException<InvalidOperationException>(() => wateringhole.Eat(species));
+            Assert.AreEqual(10, wateringhole.FoodAmount);
         }
 
         [TestMethod]
@@ -143,12 +149,14 @@ namespace EvolutionModelTests {
             var species = new MockSpecies();
             species.IsPredator = true;
             Assert.ThrowsException<InvalidOperationException>(() => wateringhole.Eat(species));
+            Assert.AreEqual(0, wateringhole.FoodAmount);
         }
 
         [TestMethod]
         public void WaterholeCanBeEatenByNoPredatorWithFood() {
             var wateringhole = new WateringHole();
             var species = new MockSpecies();
+            species.IsPredator = false;
             wateringhole.AddFood(10);
             Assert.IsTrue(wateringhole.CanBeEatenBy(species));
             Assert.AreEqual(10, wateringhole.FoodAmount);
@@ -169,6 +177,7 @@ namespace EvolutionModelTests {
         public void WaterholeCanNotBeEatenByNoPredatorNoFood() {
             var wateringhole = new WateringHole();
             var species = new MockSpecies();
+            species.IsPredator = false;
             Assert.IsFalse(wateringhole.CanBeEatenBy(species));
             Assert.AreEqual(0, wateringhole.FoodAmount);
         }
