@@ -1,4 +1,5 @@
 ﻿using Evolution.Model;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EvolutionModelTests {
@@ -56,27 +57,51 @@ namespace EvolutionModelTests {
     }
 
         [TestMethod]
-        public void WaterHoleTryEatingCanEat()
-        {
-
+        public void WaterHoleTryEatCanEat(){
+            var wateringhole = new WateringHole();
+            var species = new Species();
+            wateringhole.AddFood(10);
+            Assert.AreEqual(10, wateringhole.FoodAmount);
+            var result = wateringhole.TryEat(species, out int food);
+            Assert.AreEqual(1, food);
+            Assert.AreEqual(9, wateringhole.FoodAmount);
+            Assert.IsTrue(result);
+           
         }
 
         [TestMethod]
-        public void WaterHoleEatingCanEat()
+        public void WaterHoleEatCanEat()
         {
-
+            var wateringhole = new WateringHole();
+            var species = new Species();
+            wateringhole.AddFood(10);
+            var result = wateringhole.Eat(species);
+            Assert.AreEqual(9, wateringhole.FoodAmount);
+            Assert.AreEqual(1, result);
         }
 
         [TestMethod]
-        public void WaterHoleCannotTryEatingIfHoleIsEmpty()
+        public void WaterHoleCannotTryEatIfHoleIsEmpty()
         {
-
+            var wateringhole = new WateringHole();
+            var species = new Species();
+            var result = wateringhole.TryEat(species, out int food);
+            Assert.AreEqual(0, food);
+            Assert.IsFalse(result);
+            Assert.AreEqual(0, wateringhole.FoodAmount);
         }
 
         [TestMethod]
-        public void WaterHoleThrowsExceptionIfEatingIsEmpty()
+        public void WaterHoleThrowsExceptionIfEatIsEmpty()
         {
-
+            var wateringhole = new WateringHole();
+            var species = new Species();
+            Assert.ThrowsException<InvalidOperationException>(()=> wateringhole.Eat(species));
         }
   }
 }
+
+/* Begin met CanBeEatenBy, Wanner moet die true geven, en wanneer moet die false geven, 
+ * Er kan wel of niet eten aanwezig zijn, en het dier kan wel of niet predator zijn, 
+ * Daar heb je vier combinaties van, en dus ook vier mogelijke uitkomsten, die je ieder moet testen.
+ */ 

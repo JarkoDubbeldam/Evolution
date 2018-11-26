@@ -1,4 +1,6 @@
-﻿using System;
+﻿using System.Linq;
+using System.Collections.Generic;
+using System;
 
 namespace Evolution.Model {
   public class WateringHole : IFoodContainer, IEatable {
@@ -26,7 +28,7 @@ namespace Evolution.Model {
     public bool CanBeEatenBy(Species eater) => !eater.IsPredator && FoodAmount > 0;
 
         public bool TryEat(Species eater, out int amountEaten){
-            if(CanBeEatenBy(eater){
+            if(CanBeEatenBy(eater)){
                 FoodAmount--;
                 amountEaten = 1;
                 return true;

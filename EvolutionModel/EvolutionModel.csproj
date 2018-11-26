@@ -44,6 +44,7 @@
     <Compile Include="Aflegstapel.cs" />
     <Compile Include="Card.cs" />
     <Compile Include="IEatable.cs" />
+    <Compile Include="IEater.cs" />
     <Compile Include="IFoodContainer.cs" />
     <Compile Include="Species.cs" />
     <Compile Include="WateringHole.cs" />
