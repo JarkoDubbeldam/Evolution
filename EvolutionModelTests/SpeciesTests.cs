@@ -11,13 +11,13 @@ namespace EvolutionModelTests
     public class SpeciesTests
     {
         [TestMethod]
-        public void SpeciesBegintLeeg()
+        public void SpeciesBegintZonderEten()
         {
 
         }
 
         [TestMethod]
-        public void SpeciesCanEatFromWateringHole()
+        public void SpeciesBegintMetEenPopulationEnEenSize()
         {
 
         }
@@ -30,6 +30,12 @@ namespace EvolutionModelTests
 
         [TestMethod]
         public void SpeciesCanAddSize()
+        {
+
+        }
+
+        [TestMethod]
+        public void SpeciesCanEat()
         {
 
         }
@@ -59,12 +65,6 @@ namespace EvolutionModelTests
         }
 
         [TestMethod]
-        public void SpeciesCanEatOtherSpecies()
-        {
-
-        }
-
-        [TestMethod]
         public void SpeciesCantEatBiggerSpecies()
         {
 
@@ -78,12 +78,6 @@ namespace EvolutionModelTests
 
         [TestMethod]
         public void SpeciesCantEatMoreThanPopulation()
-        {
-
-        }
-
-        [TestMethod]
-        public void SpeciesCanEatFromFoodbank()
         {
 
         }
