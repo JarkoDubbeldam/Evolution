@@ -9,17 +9,6 @@ namespace EvolutionModelTests{
     [TestClass]
     public class FoodBankTests
     {
-        [TestMethod]
-        public void FoodBankContainsFood()
-        {
-
-        }
-
-        [TestMethod]
-        public void FoodBankCanBeEatenBySpecies()
-        {
-
-        }
 
         [TestMethod]
         public void FoodBankCanBeEatenByTrait()

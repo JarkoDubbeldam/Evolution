@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Evolution.Model
 {
-    class FoodBank : IEatable
+    public class FoodBank : IEatable
     {
     }
 }
