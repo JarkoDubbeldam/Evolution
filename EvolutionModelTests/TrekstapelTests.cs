@@ -63,5 +63,20 @@ namespace EvolutionModelTests {
 
       Assert.IsFalse(deck.TryDraw(out _));
     }
+
+    [TestMethod]
+    public void TrekstapelFiresTrekstapelEmptiedEventWhenLastCardIsDrawn() {
+
+    }
+
+    [TestMethod]
+    public void TrekstapelDoesNotFireTrekstapelEmptiedEventWhenCardIsDrawnWithMoreCardsLeft() {
+
+    }
+
+    [TestMethod]
+    public void TrekstapelDoesNotFireTrekstapelEmptiedEventWhenDeckIsAlreadyEmpty() {
+
+    }
   }
 }
