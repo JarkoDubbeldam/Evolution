@@ -22,10 +22,6 @@ namespace EvolutionModelTests.AssertExtensions {
     /// <param name="action">Action that triggers the event.</param>
     /// <param name="message">Message to display on failure.</param>
     public static void TriggersEvent(Action<EventHandler> subscriptor, Action action, string message) {
-      void EventTester(object sender, EventArgs args) {
-        throw new EventTriggeredException();
-      }
-
       subscriptor(EventTester);
       try {
         action();
@@ -33,7 +29,7 @@ namespace EvolutionModelTests.AssertExtensions {
         return;
       }
 
-      Assert.Fail("Event did not trigger on action.");
+      Assert.Fail(message);
     }
 
     /// <summary>
@@ -42,7 +38,7 @@ namespace EvolutionModelTests.AssertExtensions {
     /// <typeparam name="TEventArgs">EventArgs type used.</typeparam>
     /// <param name="subscriptor">Method used to subscribe an eventhandler.</param>
     /// <param name="action">Action that triggers the event.</param>
-    public static void TriggersEvent<TEventArgs>(Action<EventHandler<TEventArgs>> subscriptor, Action action) {
+    public static void TriggersEvent<TEventArgs>(Action<EventHandler<TEventArgs>> subscriptor, Action action) where TEventArgs : EventArgs {
       TriggersEvent(subscriptor, action, "Action did not trigger the event");
     }
 
@@ -53,11 +49,7 @@ namespace EvolutionModelTests.AssertExtensions {
     /// <param name="subscriptor">Method used to subscribe an eventhandler.</param>
     /// <param name="action">Action that triggers the event.</param>
     /// <param name="message">Message to display on failure.</param>
-    public static void TriggersEvent<TEventArgs>(Action<EventHandler<TEventArgs>> subscriptor, Action action, string message) {
-      void EventTester(object sender, TEventArgs args) {
-        throw new EventTriggeredException();
-      }
-
+    public static void TriggersEvent<TEventArgs>(Action<EventHandler<TEventArgs>> subscriptor, Action action, string message) where TEventArgs : EventArgs {
       subscriptor(EventTester);
       try {
         action();
@@ -66,7 +58,66 @@ namespace EvolutionModelTests.AssertExtensions {
         return;
       }
 
-      Assert.Fail("Event did not trigger on action.");
+      Assert.Fail(message);
+    }
+
+    /// <summary>
+    /// Tests whether the specified event does not trigger during the action.
+    /// </summary>
+    /// <param name="subscriptor">Method used to subscribe an eventhandler.</param>
+    /// <param name="action">Action that should not trigger the event.</param>
+    public static void DoesNotTriggerEvent(Action<EventHandler> subscriptor, Action action) {
+      DoesNotTriggerEvent(subscriptor, action, "Action did trigger event");
+    }
+
+
+    /// <summary>
+    /// Tests whether the specified event does not trigger during the action.
+    /// </summary>
+    /// <param name="subscriptor">Method used to subscribe an eventhandler.</param>
+    /// <param name="action">Action that should not trigger the event.</param>
+    /// <param name="message">Message to display on failure.</param>
+    public static void DoesNotTriggerEvent(Action<EventHandler> subscriptor, Action action, string message) {
+      subscriptor(EventTester);
+
+      try {
+        action();
+      } catch (EventTriggeredException) {
+        Assert.Fail(message);
+      }
+    }
+
+
+    /// <summary>
+    /// Tests whether the specified event does not trigger during the action.
+    /// </summary>
+    /// <typeparam name="TEventArgs">EventArgs type used.</typeparam>
+    /// <param name="subscriptor">Method used to subscribe an eventhandler.</param>
+    /// <param name="action">Action that should not trigger the event.</param>
+    public static void DoesNotTriggerEvent<TEventArgs>(Action<EventHandler<TEventArgs>> subscriptor, Action action) where TEventArgs : EventArgs {
+      DoesNotTriggerEvent(subscriptor, action, "Action did trigger event");
+    }
+
+
+    /// <summary>
+    /// Tests whether the specified event does not trigger during the action.
+    /// </summary>
+    /// <typeparam name="TEventArgs">EventArgs type used.</typeparam>
+    /// <param name="subscriptor">Method used to subscribe an eventhandler.</param>
+    /// <param name="action">Action that should not trigger the event.</param>
+    /// <param name="message">Message to display on failure.</param>
+    public static void DoesNotTriggerEvent<TEventArgs>(Action<EventHandler<TEventArgs>> subscriptor, Action action, string message) where TEventArgs : EventArgs {
+      subscriptor(EventTester);
+
+      try {
+        action();
+      } catch (EventTriggeredException) {
+        Assert.Fail(message);
+      }
+    }
+
+    static void EventTester<TEventArgs>(object sender, TEventArgs args) where TEventArgs : EventArgs {
+      throw new EventTriggeredException();
     }
   }
 }
