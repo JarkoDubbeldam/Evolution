@@ -61,10 +61,22 @@ namespace EvolutionModelTests.AssertExtensions {
       Assert.Fail(message);
     }
 
+    /// <summary>
+    /// Tests whether the specified event does not trigger during the action.
+    /// </summary>
+    /// <param name="subscriptor">Method used to subscribe an eventhandler.</param>
+    /// <param name="action">Action that should not trigger the event.</param>
     public static void DoesNotTriggerEvent(Action<EventHandler> subscriptor, Action action) {
       DoesNotTriggerEvent(subscriptor, action, "Action did trigger event");
     }
 
+
+    /// <summary>
+    /// Tests whether the specified event does not trigger during the action.
+    /// </summary>
+    /// <param name="subscriptor">Method used to subscribe an eventhandler.</param>
+    /// <param name="action">Action that should not trigger the event.</param>
+    /// <param name="message">Message to display on failure.</param>
     public static void DoesNotTriggerEvent(Action<EventHandler> subscriptor, Action action, string message) {
       subscriptor(EventTester);
 
@@ -75,10 +87,25 @@ namespace EvolutionModelTests.AssertExtensions {
       }
     }
 
+
+    /// <summary>
+    /// Tests whether the specified event does not trigger during the action.
+    /// </summary>
+    /// <typeparam name="TEventArgs">EventArgs type used.</typeparam>
+    /// <param name="subscriptor">Method used to subscribe an eventhandler.</param>
+    /// <param name="action">Action that should not trigger the event.</param>
     public static void DoesNotTriggerEvent<TEventArgs>(Action<EventHandler<TEventArgs>> subscriptor, Action action) where TEventArgs : EventArgs {
       DoesNotTriggerEvent(subscriptor, action, "Action did trigger event");
     }
 
+
+    /// <summary>
+    /// Tests whether the specified event does not trigger during the action.
+    /// </summary>
+    /// <typeparam name="TEventArgs">EventArgs type used.</typeparam>
+    /// <param name="subscriptor">Method used to subscribe an eventhandler.</param>
+    /// <param name="action">Action that should not trigger the event.</param>
+    /// <param name="message">Message to display on failure.</param>
     public static void DoesNotTriggerEvent<TEventArgs>(Action<EventHandler<TEventArgs>> subscriptor, Action action, string message) where TEventArgs : EventArgs {
       subscriptor(EventTester);
 
