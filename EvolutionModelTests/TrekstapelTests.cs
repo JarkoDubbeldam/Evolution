@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Evolution.Model;
+using EvolutionModelTests.AssertExtensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EvolutionModelTests {
@@ -66,16 +67,23 @@ namespace EvolutionModelTests {
 
     [TestMethod]
     public void TrekstapelFiresTrekstapelEmptiedEventWhenLastCardIsDrawn() {
+      var deck = new Trekstapel(GetCards(1));
 
+      AssertExtension.TriggersEvent(x => deck.TrekstapelEmptied += x, () => deck.TryDraw(out _));
     }
 
     [TestMethod]
     public void TrekstapelDoesNotFireTrekstapelEmptiedEventWhenCardIsDrawnWithMoreCardsLeft() {
+      var deck = new Trekstapel(GetCards(2));
 
+      AssertExtension.DoesNotTriggerEvent(x => deck.TrekstapelEmptied += x, () => deck.TryDraw(out _));
     }
 
     [TestMethod]
     public void TrekstapelDoesNotFireTrekstapelEmptiedEventWhenDeckIsAlreadyEmpty() {
+      var deck = new Trekstapel(GetCards(0));
+
+      AssertExtension.DoesNotTriggerEvent(x => deck.TrekstapelEmptied += x, () => deck.TryDraw(out _));
 
     }
   }
